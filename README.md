@@ -1,8 +1,6 @@
 Example Voting App
 =========
 
-### This is a new comment for testing master branch protection
-
 Getting started
 ---------------
 
