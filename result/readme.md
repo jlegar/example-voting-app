@@ -1,1 +1,1 @@
-## This is manually created to test hooks
+# This is a test to verify git pool SCM working correctly.
