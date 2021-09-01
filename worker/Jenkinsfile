@@ -19,7 +19,7 @@ pipeline {
         	steps{
             	echo 'Running Unit Tets on worker app'
 				dir('worker'){
-					mvn clean test
+					sh 'mvn clean test'
 				}
           	}
       	}
@@ -28,7 +28,7 @@ pipeline {
         	steps{
             	echo 'Packaging worker app'
 				dir('worker'){
-					mvn package
+					sh 'mvn package'
 				}
           	}
       	}
