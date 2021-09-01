@@ -10,8 +10,9 @@ pipeline {
 			when {
 				changeset '**/result/**'
 			}
-			dir('result'){
-				steps {
+			steps {
+				echo 'Building NodeJS Result APP'
+				dir('result'){
 					sh 'npm install'
 				}
 			}
@@ -21,11 +22,12 @@ pipeline {
 			when {
 				changeset '**/result/**'
 			}
-			dir('result'){
-				steps {
-                	sh 'npm install'
-                	sh 'npm run test'
-            	}
+			steps {
+				echo 'Unit Testing for NodeJS APP'
+				dir('result'){
+					sh 'npm install'
+					sh 'npm run test'
+				}
 			}
 		}
 	}
