@@ -10,8 +10,10 @@ pipeline {
 			when {
 				changeset '**/result/**'
 			}
-			steps {
-				sh 'npm install'
+			dir('result'){
+				steps {
+					sh 'npm install'
+				}
 			}
 		}
 
@@ -19,9 +21,11 @@ pipeline {
 			when {
 				changeset '**/result/**'
 			}
-			steps {
-				sh 'npm install'
-				sh 'npm run test'
+			dir('result'){
+				steps {
+                	sh 'npm install'
+                	sh 'npm run test'
+            	}
 			}
 		}
 	}
