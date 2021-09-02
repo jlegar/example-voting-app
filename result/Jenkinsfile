@@ -1,8 +1,8 @@
 pipeline {
-	agent any
-
-	tools {
-		nodejs 'NodeJS 8.9'
+	agent {
+		docker {
+			image 'node:12-slim'
+		}
 	}
 	
 	stages {
