@@ -49,6 +49,8 @@ pipeline {
 					docker.withRegistry('https://index.docker.io/v1', 'dockerlogin') {
 						def result_image = docker.build("jlegardevops/result:v${env.BUILD_ID}", "./result")
 						result_image.push()
+						result_image.push("${env.BRANCH_NAME}")
+						result_image.push("latest")
 					}
 				}
 			}
