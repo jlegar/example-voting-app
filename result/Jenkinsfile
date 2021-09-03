@@ -44,7 +44,7 @@ pipeline {
 				branch 'master'
 			}
 			steps {
-				echo 'Packaging app with Docker Image Build'
+				echo 'Packaging app with Docker Image Build 2'
 				script {
 					docker.withRegistry('https://index.docker.io/v1', 'dockerlogin') {
 						def result_image = docker.build("jlegardevops/result:v${env.BUILD_ID}", "./result")
