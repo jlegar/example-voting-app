@@ -46,7 +46,7 @@ pipeline {
 			steps {
 				echo 'Packaging app with Docker Image Build'
 				script {
-					docker.withRegistry('https://index.docker.io/v1', 'jlegar-dockerhub-cred') {
+					docker.withRegistry('https://index.docker.io/v1', 'my-dockerhub') {
 						def result_image = docker.build("result:v${env.BUILD_ID}", "./result")
 						result_image.push()
 					}
