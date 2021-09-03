@@ -46,7 +46,7 @@ pipeline {
 			steps {
 				echo 'Packaging app with Docker Image Build'
 				script {
-					docker.build("result:v${env.BUILD_ID}")
+					docker.build("result:v${env.BUILD_ID}", "./result")
 				}
 			}
 		}
