@@ -1,12 +1,13 @@
 pipeline {
-	agent {
-		docker {
-			image 'node:12-slim'
-		}
-	}
+	agent none
 	
 	stages {
 		stage('build'){
+			agent {
+				docker {
+					image 'node:12-slim'
+				}
+			}
 			when {
 				changeset '**/result/**'
 			}
@@ -19,6 +20,11 @@ pipeline {
 		}
 
 		stage('test'){
+			agent {
+				docker {
+					image 'node:12-slim'
+				}
+			}
 			when {
 				changeset '**/result/**'
 			}
@@ -27,6 +33,20 @@ pipeline {
 				dir('result'){
 					sh 'npm install'
 					sh 'npm run test'
+				}
+			}
+		}
+
+		stage('package'){
+			agent any
+			when {
+				changeset '**/result/**'
+				branch master
+			}
+			steps {
+				echo 'Packaging app with Docker Image Build'
+				script {
+					docker.build('result:v${env.BUILD_ID}')
 				}
 			}
 		}
