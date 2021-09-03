@@ -6,4 +6,5 @@
 4. Node pipeline with Docker.
 5. Try to watch docker container while running Jenkins jobs.
 6. Testing from my personal computer.
+7. Testing from personal computer no vm.
 
