@@ -32,6 +32,7 @@ pipeline {
 			steps {
 				echo 'Unit Testing for Python APP'
 				dir('vote'){
+					sh 'pip install -r requirements.txt'
 					sh 'nosetests -v'
 				}
 			}
