@@ -43,11 +43,16 @@ pipeline {
 			agent any
 			when {
 				changeset '**/vote/**'
+				branch 'master'
 			}
 			steps {
 				echo "Packaging Vote App with Docker Image Build"
 				script {
-					docker.build("vote:v${env.BUILD_ID}", "./vote")
+					docker.withRegistry('https://index.docker.io/v1/', 'dockerlogin') {
+						def vote_image = docker.build("vote:v${env.BUILD_ID}", "./vote")
+						vote_image.push()
+						vote_image.push('latest')
+					}
 				}
 			}
 		}
