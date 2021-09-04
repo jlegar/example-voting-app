@@ -30,5 +30,17 @@ pipeline {
 				}
 			}
 		}
+		
+		stage('package'){
+			when {
+				changeset '**/vote/**'
+			}
+			steps {
+				echo "Packaging Vote App with Docker Image Build"
+				script {
+					docker.build("vote:v${env.BUILD_ID}", "./vote")
+				}
+			}
+		}
 	}
 } 
