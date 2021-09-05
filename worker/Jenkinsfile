@@ -63,7 +63,7 @@ pipeline {
             	echo 'Packaging worker app with Docker Image Build'
 				script {
 					docker.withRegistry('https://index.docker.io/v1', 'dockerlogin'){
-						define worker_image = docker.build("jlegardevops/worker:v${env.BUILD_ID}", "./worker")
+						def worker_image = docker.build("jlegardevops/worker:v${env.BUILD_ID}", "./worker")
 						worker_image.push()
 						worker_image.push('latest')
 					}
