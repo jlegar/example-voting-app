@@ -1,11 +1,12 @@
 # Build image from Maven
-FROM maven:3.6.1-jdk-8-slim
+FROM maven:3.6.1-jdk-8-alpine
 
 # Change working directory
 WORKDIR /app
 
 # Copy app data
-COPY . .
+COPY ./target/worker-jar-with-dependencies.jar ./worker-app.jar
 
-CMD sh
+# Run command to start app
+CMD java -jar worker-app.jar
 
