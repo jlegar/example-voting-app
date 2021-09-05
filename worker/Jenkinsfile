@@ -44,6 +44,7 @@ pipeline {
 			}
 			when {
 				changeset '**/worker/**'
+				branch 'master'
 			}
         	steps{
 				echo 'Creating archive artifacts'
@@ -58,6 +59,7 @@ pipeline {
 			agent any
 			when {
 				changeset '**/worker/**'
+				branch 'master'
 			}
         	steps{
             	echo 'Packaging worker app with Docker Image Build'
@@ -70,11 +72,5 @@ pipeline {
 				}
           	}
       	}
-	}
-
-	post {
-		always {
-			echo 'Building multibranch pipeline for worker is completed..'
-		}
 	}
 }
