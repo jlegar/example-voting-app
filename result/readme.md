@@ -7,4 +7,6 @@
 5. Try to watch docker container while running Jenkins jobs.
 6. Testing from my personal computer.
 7. Testing from personal computer no vm.
+8. Test this rise the monopipe.
+9. Rise package result substage
 
