@@ -129,33 +129,55 @@ pipeline {
 		
 		stage('Package'){
 			agent any
-			when {
+/*			when {
 				branch 'master'
 				changeRequest()
 			}
-			steps {
-				echo "Packaging WORKER with Docker Image Build"
-				script {
-					docker.withRegistry('https://index.docker.io/v1/', 'dockerlogin') {
-						def vote_image = docker.build("jlegardevops/worker:v${env.BUILD_ID}", "./worker")
-						vote_image.push()
-						vote_image.push('latest')
+*/
+			stages {
+				stage('Package WORKER with docker'){
+					when{
+						changeset '**/worker/**'
+					}
+					steps{
+						echo "Packaging WORKER with Docker Image Build"
+						script {
+							docker.withRegistry('https://index.docker.io/v1/', 'dockerlogin') {
+								def vote_image = docker.build("jlegardevops/worker:v${env.BUILD_ID}", "./worker")
+								vote_image.push()
+								vote_image.push('latest')
+							}
+						}
 					}
 				}
-				echo "Packaging RESULT with Docker Image Build"
-				script {
-					docker.withRegistry('https://index.docker.io/v1/', 'dockerlogin') {
-						def vote_image = docker.build("jlegardevops/result:v${env.BUILD_ID}", "./result")
-						vote_image.push()
-						vote_image.push('latest')
+				stage('Package RESULT with docker'){
+					when{
+						changeset '**/result/**'
+					}
+					steps{
+						echo "Packaging RESULT with Docker Image Build"
+						script {
+							docker.withRegistry('https://index.docker.io/v1/', 'dockerlogin') {
+								def vote_image = docker.build("jlegardevops/result:v${env.BUILD_ID}", "./result")
+								vote_image.push()
+								vote_image.push('latest')
+							}
+						}
 					}
 				}
-				echo "Packaging VOTE with Docker Image Build"
-				script {
-					docker.withRegistry('https://index.docker.io/v1/', 'dockerlogin') {
-						def vote_image = docker.build("jlegardevops/vote:v${env.BUILD_ID}", "./vote")
-						vote_image.push()
-						vote_image.push('latest')
+				stage('Package VOTE with docker'){
+					when{
+						changeset '**/vote/**'
+					}
+					steps{
+						echo "Packaging VOTE with Docker Image Build"
+						script {
+							docker.withRegistry('https://index.docker.io/v1/', 'dockerlogin') {
+								def vote_image = docker.build("jlegardevops/vote:v${env.BUILD_ID}", "./vote")
+								vote_image.push()
+								vote_image.push('latest')
+							}
+						}
 					}
 				}
 			}
